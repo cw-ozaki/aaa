@@ -24,6 +24,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >-
-            cw-ozaki/aaa merge
+           merge cw-ozaki/aaa
                   -l 'number == `999999'
                   -l 'state == `"open"`'
