@@ -19,7 +19,7 @@ jobs:
     name: merge
     runs-on: ubuntu-18.04
     steps:
-      - uses: k-kinzal/pr-action@master
+      - uses: k-kinzal/pr-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
