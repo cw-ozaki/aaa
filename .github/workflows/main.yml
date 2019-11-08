@@ -23,4 +23,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: merge cw-ozaki/aaa - 'state == `\"aaa\"`'
+          args: --help
+      - uses: k-kinzal/pr-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: merge --help
+      - uses: k-kinzal/pr-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: merge cw-ozaki/aaa --rule 'state == `\"aaa\"`'
