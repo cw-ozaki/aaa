@@ -19,8 +19,16 @@ jobs:
     name: merge
     runs-on: ubuntu-18.04
     steps:
-      - uses: k-kinzal/pr-action@dev
+      - uses: actions/checkout@v1
+      - name: Set Value
+        id: PR_NUMBER
+        run: echo ::set-output name=tag::$(echo $GITHUB_REF | awk -F / '{print $3}')
+      - uses: k-kinzal/pr-action
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: merge cw-ozaki/aaa --rule "state == `\"open\"`"
+          args: >-
+            merge k-kinzal/pr-action
+                  -l 'number == `${{ step.PR_NUMBER }}`'
+                  -l "state == `\"open\"`"
+                  -l "user.login == `\"github-actions[bot]\"`'
