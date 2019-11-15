@@ -1,4 +1,4 @@
-name: Automerge from PR Event
+name: Automerge
 on:
   pull_request:
     types:
@@ -16,22 +16,12 @@ on:
   status: {}
 jobs:
   merge:
-    name: merge
+    name: Summary
     runs-on: ubuntu-18.04
     steps:
-      - name: Env
-        run: env
-      - name: Payload
-        run: cat $GITHUB_EVENT_PATH
-      - name: Perflog1
-        run: cat /home/runner/perflog/Runner.perf
-      - name: Perflog2
-        run: cat /home/runner/perflog/Worker.perf
-      - name: Set Value
-        id: set_pr_number
-        run: echo ::set-output name=number::$(echo $GITHUB_REF | awk -F / '{print $3}')
-      - uses: "k-kinzal/pr-action@master"
+      - uses: "k-kinzal/pr-action/check@dev"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NO_EXIT_CODE: true
         with:
-          args: -l "number == `${{ steps.set_pr_number.outputs.number }}`" -l "state == `\"open\"`" -l "user.login == `\"github-actions[bot]\"`"
+          args: -l "user.login == `\"github-actions[bot]\"`"
